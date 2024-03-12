@@ -1,0 +1,96 @@
+Number of GPU used : 2 
+
+Includes 6000 train samples, 2000 val samples, 2000 test samples 
+Batch size 50 
+
+Comment on the model : Neumann 2 
+
+Model configuration : 
+{
+'latent_dim':'10'
+'hidden_dim':'10'
+'n_layers':'1'
+'fw_tol':'1e-05'
+'fw_thres':'500'
+'bw_tol':'1e-08'
+'bw_thres':'500'
+'solver':'<function broyden at 0x7fd64dd1f820>'
+'path_logs':'results/08_06_2023_18:02:27/logs'
+}
+
+Training configuration : 
+{
+'model':'DataParallel(
+  (module): ModelDEQDSS(
+    (autoencoder): Autoencoder(
+      (encoder): Encoder(
+        (mlp): MLP(
+          (mlp): Sequential(
+            (0): Linear(in_features=1, out_features=10, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=10, out_features=10, bias=True)
+          )
+        )
+      )
+      (decoder): Decoder(
+        (mlp): MLP(
+          (mlp): Sequential(
+            (0): Linear(in_features=10, out_features=10, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=10, out_features=1, bias=True)
+          )
+        )
+      )
+    )
+    (deqdss): DeepEquilibrium(
+      (f): Function(
+        (laynorm): LayerNorm((10,), eps=1e-05, elementwise_affine=True)
+        (phi_to_list): ModuleList(
+          (0): Phi_to()
+        )
+        (phi_from_list): ModuleList(
+          (0): Phi_from()
+        )
+        (alpha): Sequential(
+          (0): Linear(in_features=33, out_features=1, bias=True)
+          (1): Sigmoid()
+        )
+        (update_list): ModuleList(
+          (0): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=33, out_features=10, bias=True)
+              (1): ReLU()
+              (2): Linear(in_features=10, out_features=10, bias=True)
+            )
+          )
+        )
+        (phi_neumann): Phi_from()
+        (update_neumann): MLP(
+          (mlp): Sequential(
+            (0): Linear(in_features=25, out_features=10, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=10, out_features=10, bias=True)
+          )
+        )
+      )
+    )
+    (mse_loss): MSELoss()
+  )
+)'
+'config_model':'{'latent_dim': 10, 'hidden_dim': 10, 'n_layers': 1, 'fw_tol': 1e-05, 'fw_thres': 500, 'bw_tol': 1e-08, 'bw_thres': 500, 'solver': <function broyden at 0x7fd64dd1f820>, 'path_logs': 'results/08_06_2023_18:02:27/logs'}'
+'loader_train':'<torch_geometric.loader.data_list_loader.DataListLoader object at 0x7fd64d4204f0>'
+'loader_val':'<torch_geometric.loader.data_list_loader.DataListLoader object at 0x7fd64d420cd0>'
+'sup_weight':'0.001'
+'ae_weight':'0.0'
+'jac_weight':'1.0'
+'gradient_clip':'0.01'
+'lr_deq':'0.005'
+'sched_step_deq':'0.7'
+'lr_ae':'0.01'
+'sched_step_ae':'0.7'
+'max_epochs':'400'
+'min_loss_save':'100000.0'
+'path_ckpt':'results/08_06_2023_18:02:27/ckpt'
+}
+
+Number of parameters : 2175 

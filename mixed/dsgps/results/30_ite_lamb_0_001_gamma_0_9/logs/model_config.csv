@@ -1,0 +1,84 @@
+Number of GPU used : 2 
+
+Includes 6000 train samples, 2000 val samples, 2000 test samples 
+Batch size 50 
+
+Comment on the model : DSGPS Neumann - 30 Iterations - Gamma = 0.9 - 400 epochs - lamb 0.001 
+
+Model configuration : 
+{
+'latent_dim':'10'
+'k':'30'
+'alpha':'0.001'
+'gamma':'0.9'
+'lamb':'0.001'
+'path_logs':'results/30_ite_lamb_0_001_gamma_0_9/logs'
+}
+
+Training configuration : 
+{
+'model':'DataParallel(
+  (module): ModelDSGPS(
+    (laynorm): LayerNorm((10,), eps=1e-05, elementwise_affine=True)
+    (phi_to): Phi_to()
+    (phi_from): Phi_from()
+    (z_k): MLPActivation(
+      (mlp): Sequential(
+        (0): Linear(in_features=33, out_features=10, bias=True)
+        (1): Sigmoid()
+      )
+    )
+    (r_k): MLPActivation(
+      (mlp): Sequential(
+        (0): Linear(in_features=33, out_features=10, bias=True)
+        (1): Sigmoid()
+      )
+    )
+    (correction): MLPActivation(
+      (mlp): Sequential(
+        (0): Linear(in_features=33, out_features=10, bias=True)
+        (1): Tanh()
+      )
+    )
+    (phi_neumann): Phi_from()
+    (update_neumann): MLP(
+      (mlp): Sequential(
+        (0): Linear(in_features=25, out_features=10, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=10, out_features=10, bias=True)
+      )
+    )
+    (autoencoder): Autoencoder(
+      (encoder): Encoder(
+        (mlp): MLP(
+          (mlp): Sequential(
+            (0): Linear(in_features=1, out_features=10, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=10, out_features=10, bias=True)
+          )
+        )
+      )
+      (decoder): Decoder(
+        (mlp): MLP(
+          (mlp): Sequential(
+            (0): Linear(in_features=10, out_features=10, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=10, out_features=1, bias=True)
+          )
+        )
+      )
+    )
+    (mse_loss): MSELoss()
+  )
+)'
+'config_model':'{'latent_dim': 10, 'k': 30, 'alpha': 0.001, 'gamma': 0.9, 'lamb': 0.001, 'path_logs': 'results/30_ite_lamb_0_001_gamma_0_9/logs'}'
+'loader_train':'<torch_geometric.loader.data_list_loader.DataListLoader object at 0x7fd93e3cdf70>'
+'loader_val':'<torch_geometric.loader.data_list_loader.DataListLoader object at 0x7fd93e3cdf40>'
+'gradient_clip':'0.01'
+'lr':'0.001'
+'max_epochs':'400'
+'min_loss_save':'100000.0'
+'path_ckpt':'results/30_ite_lamb_0_001_gamma_0_9/ckpt'
+}
+
+Number of parameters : 2711 
